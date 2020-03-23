@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <title>Vue起步练习</title>
+</head>
+
+<body>
+    <div id="app">
+        <div v-bind:id="data.info">
+            {{data.name}}
+        </div>
+        <span :title="message">鼠标悬停</span>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        let metaData = {
+            name: 'soft1851',
+            info: 'Vue学习'
+        }
+
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                data: metaData,
+                message: '当前系统时间：' + new Date().toLocaleTimeString()
+            }
+        })
+
+
+    </script>
+
+</body>
+
+</html>

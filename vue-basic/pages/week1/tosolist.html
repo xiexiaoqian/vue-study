@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tosolist</title>
+</head>
+<style>
+    button {
+        display: inline-block;
+    }
+
+    input {
+        cursor: pointer;
+    }
+
+    .select {
+        display: flex;
+        width: 30%;
+        justify-content: space-around;
+    }
+
+    .list-item {
+        display: flex;
+        align-items: center;
+        width: 30%;
+    }
+    .task{
+        display: flex;
+        width: 50%;
+        align-items: center;
+    }
+</style>
+
+<body>
+    <div id="app">
+        <div class="select">
+            <div class="doing">
+                <input type="radio" v-model="check" value="doing" id="doing" @click="showDoing()">
+                <label for="doing">进行中</label>
+            </div>
+            <div class="finished">
+                <input type="radio" v-model="check" value="finished" id="finished" @click="showFinished()">
+                <label for="finished">已完成</label>
+            </div>
+            <div class="batch">
+                <button>批量完成</button>
+            </div>
+        </div>
+
+        <div v-for="(item,index) in listTemp" :key="index" class="list-item">
+            <div class="task">
+                <input type="checkbox" :v-model="checked" :value="item.title" @click="changeFinished(index)"/>
+                <p v-if="item.finished" style="text-decoration: line-through;" @click="review(index)">
+                    {{ item.title }}</p>
+                <p v-else>{{ item.title }}</p>
+            </div>
+            <button v-show="!item.finished" @click="achieve(index)">完成</button>
+        </div>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            check: '',
+            checked: '',
+            listTemp: [],
+            list: [
+                {
+                    id: 1,
+                    title: '课程1',
+                    finished: false
+                },
+                {
+                    id: 2,
+                    title: '课程2',
+                    finished: true
+                },
+                {
+                    id: 3,
+                    title: '课程3',
+                    finished: false
+                },
+                {
+                    id: 4,
+                    title: '课程4',
+                    finished: true
+                },
+                {
+                    id: 5,
+                    title: '课程5',
+                    finished: false
+                },
+            ]
+
+        },
+        created() {
+            this.list.forEach(item => {
+                this.listTemp.push(item)
+            });
+        },
+        methods: {
+            showDoing() {
+                this.listTemp = this.list.filter(item => {
+                    if (!item.finished) {
+                        return item
+                    }
+                });
+            },
+            showFinished() {
+                this.listTemp = this.list.filter(item => {
+                    if (item.finished) {
+                        return item
+                    }
+                })
+            },
+            // 完成按钮的监听
+            achieve(index) {
+                let item = this.listTemp[index]         // 课程五
+                this.list.filter((v) => {
+                    if (item.id === v.id) {
+                        v.finished = true
+                    }
+                })
+                this.listTemp.splice(index, 1)
+            },
+            review(index) {
+                let item = this.listTemp[index]
+                this.list.filter((v) => {
+                    item.id === v.id ? v.finished = false : v.finished
+                })
+                this.listTemp.splice(index,1)
+            },
+            changeFinished(index){
+                let item = this.listTemp[index]
+                this.list.filter((v) => {
+                    item.id === v.id ? v.finished = true : v.finished
+                })
+                console.log(this.checked)
+            }
+        },
+
+    })
+
+</script>
+
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <meta name="referrer" content="no-referrer">
+    <title>足球比赛比分播报</title>
+</head>
+<style>
+
+    .progress-bar{
+        width: 100%;
+        height: 20px;
+        border: 1px solid cornflowerblue;
+    }
+
+    .progress{
+        height: 20px;
+        background-color: cornflowerblue;
+    }
+
+.content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.score{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+}
+
+.btn-large{
+    width: 250px;
+    height: 50px;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    color: aliceblue;
+    background-color: cornflowerblue;
+}
+
+.btn-large:disabled{
+    background-color:lightslategray;
+}
+</style>
+
+<body>
+    <div id="app">
+
+        <h1>比赛时间： {{ time }} </h1>
+        <div class="progress-bar">
+            <div class="progress" :style="'width:' + percent + '%;'"> {{ getPercent }} </div>
+        </div>
+        <h1>直播播报：{{ report }} </h1>
+
+        <div class="content">
+            <div class="item">
+                <div class="score">
+                    <h2>中国队进球数： {{ team.China }} </h2>
+                    <button class="btn-large" @click="team.China += 1" :disabled="time === maxTime">点击中国队进一球</button>
+                </div>
+            </div>
+            <div class="item">
+                <div class="score">
+                    <h2>韩国队进球数： {{ team.Korea }} </h2>
+                    <button class="btn-large" @click="team.Korea += 1" :disabled="time === maxTime">点击韩国队进一球</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+<script>
+    const vue = new Vue({
+        el: '#app',
+        data: {
+            time: 0,
+            maxTime: 50,
+            percent: 0,
+            team: {
+                China: 0,
+                Korea: 0,
+            },
+        },
+
+        created() {
+            let time = setInterval(() => {
+                this.time += 1
+                if (this.time === this.maxTime) {
+                    clearInterval(time)
+                }
+            }, 1000)
+
+        },
+
+        methods: {
+
+        },
+
+        computed: {
+            report() {
+                if (this.time < this.maxTime) {
+                    if (this.team.China < this.team.Korea) {
+                        return "韩国队领先"
+                    } else if (this.team.China > this.team.Korea) {
+                        return "中国队领先"
+                    } else if (this.team.China == this.team.Korea) {
+                        return "双方僵持"
+                    }
+                } else {
+                    if (this.team.China < this.team.Korea) {
+                        return "韩国队获胜"
+                    } else if (this.team.China > this.team.Korea) {
+                        return "中国队获胜"
+                    } else if (this.team.China == this.team.Korea) {
+                        return "平局"
+                    }
+                }
+            },
+            getPercent(){
+                this.percent = Math.floor(this.time / this.maxTime * 100)
+                return `${this.percent}%`
+            },
+        },
+
+        filters: {
+
+        }
+    })
+</script>
+
+</html>

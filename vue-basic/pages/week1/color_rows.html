@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="keywords" content="学习" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="shortcut icon" type="image/X-icon" />
+    <title>样式绑定</title>
+  </head>
+  <body>
+    <style>
+      .item {
+        display: flex;
+        border: 1px solid black;
+      }
+      .item-pink {
+        background-color: pink;
+      }
+      .item-purple {
+        background-color: purple;
+      }
+      .item-black {
+        background-color: black;
+      }
+      p {
+        height: 50px;
+        color: white;
+      }
+      .container {
+        background-color: rgb(178, 223, 219);
+      }
+      .head {
+        background-color: rgb(77, 182, 172);
+        text-align: center;
+        height: 50px;
+      }
+      .end {
+        display: flex;
+        position: sticky;
+        bottom: 0;
+        background-color: rgb(77, 182, 172);
+      }
+      ul {
+        display: flex;
+        list-style: none;
+      }
+      li {
+        width: 110px;
+        position: relative;
+        left: -30px;
+        color: gray;
+      }
+      .itemClass{
+          display: flex;
+      }
+    </style>
+    <div id="app">
+      <div class="container">
+        <div class="head">
+          <h1>顶部导航栏</h1>
+        </div>
+        <p v-for="(item,index) in items" :key="index" :class="itemClass(index)">
+          {{ item }}
+        </p>
+
+        <h5>工业1851</h5>
+        <h5>工业1851</h5>
+        <h5>工业1851</h5>
+        <h5>工业1851</h5>
+        <h5>工业1851</h5>
+        <h5>工业1851</h5>
+        <h5>工业1851</h5>
+      </div>
+      <div class="end">
+        <ul>
+          <li>样式绑定</li>
+          <li style="color: black;">双向绑定</li>
+          <li>todo-list</li>
+        </ul>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          blackClass: "item-black",
+          pinkClass: "item-pink",
+          purpleClass: "item-purpul",
+          size: "small",
+          items: []
+        },
+        created() {
+          for (let i = 0; i < 8; i++) {
+            this.items.push("王庆媛" + i);
+          }
+        },
+        computed: {},
+        methods: {
+          itemClass(index) {
+            if (index % 2 === 0) {
+              return this.pinkClass;
+            }
+            if (index % 3 === 0) {
+              return this.purpleClass;
+            } else {
+              return this.blackClass;
+            }
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

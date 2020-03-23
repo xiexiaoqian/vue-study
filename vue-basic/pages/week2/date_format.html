@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <meta name="referrer" content="no-referrer">
+    <title>在插值表达式、函数、过滤器中分别实现日期时间的格式化</title>
+</head>
+<style>
+
+</style>
+
+<body>
+    <div id="app">
+
+        <h1>插值表达式：{{ today }}</h1>
+        <h1>函数：{{ formatTime() }}</h1>
+        <h1>过滤器1：{{ today | filterrr }}</h1>
+        <h1>过滤器2：{{ today | filterrr }}</h1>
+
+        <!-- 计算属性练习 -->
+        <textarea name="demo" id="" cols="40" rows="5" v-model="info" maxlength="200"></textarea>
+        <p>还能输入: {{ fontCount }} </p>
+
+    </div>
+</body>
+<script>
+    const vue = new Vue({
+        el: '#app',
+        data: {
+            today: new Date(),
+            maxLength: 200,
+            info: '',
+        },
+
+        created() {
+
+        },
+
+        methods: {
+            formatTime:function() {
+                let dt = new Date()
+                let y = dt.getFullYear
+                let m = (dt.getMonth() + 1).toString().padStart(2, '0')
+                let d = dt.getDate().toString.padStart(2, '0')
+                return `${y}-${m}-${d}`
+            },
+
+        },
+        computed: {
+            fontCount() {
+                count = this.maxLength - this.info.length
+                return count
+            },
+
+        },
+
+        filters: {
+            filterrr: function (date) {
+                if (!date) {
+                    return ''
+                } else {
+                    const year = date.getFullYear()
+                    const month = date.getMonth() + 1
+                    const day = date.getDate()
+                    const hours = date.getHours()
+                    const mins = date.getMinutes()
+                    const secs = date.getSeconds()
+                    return `${year}-${month}-${day} ${hours}:${mins}:${secs}`
+                }
+            },
+            formatDate: function (dt) {
+                if (!dt) {
+                    return ''
+                } else {
+                    let dt = new Date()
+                    let y = dt.getFullYear
+                    let m = (dt.getMonth() + 1).toString().padStart(2, '0')
+                    let d = dt.getDate().toString.padStart(2, '0')
+                    return `${y}-${m}-${d}`
+                }
+            }
+        }
+    })
+</script>
+
+</html>

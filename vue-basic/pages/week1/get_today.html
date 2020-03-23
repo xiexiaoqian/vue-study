@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <title>悬停，插值表达式，函数，过滤器</title>
+</head>
+
+<body>
+    <div id="app">
+        <div v-bind:id="data.info">
+            {{data.name}}
+        </div>
+        <span :title="message">鼠标悬停</span>
+
+        <h1> {{ message.split('').reverse().join('')}} </h1>
+        <h1> {{ this.reversedTime() }} </h1>
+        <h1> {{ message | reversedTime }} </h1>
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        let metaData = {
+            name: 'soft1851',
+            info: 'Vue学习'
+        }
+
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                data: metaData,
+                message: '当前系统时间：' + new Date().toLocaleTimeString()
+            },
+            methods: {
+                reversedTime(){
+                    return this.message.split('').join('')
+                }
+            },
+            filters:{
+                reversedTime(v){
+                    let value = v
+                    if(!value){
+                        return ''
+                    }
+                    value = value.split('').join('')
+                    return value
+                }
+            }
+        })
+
+
+    </script>
+
+</body>
+
+</html>

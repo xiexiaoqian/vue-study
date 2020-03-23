@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <title>todolist-封装item组件，并通过slot插槽进行内容分发,进度条</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 进度条-行内样式 -->
+        <div class="progress">
+            <div class="longwarp">
+                <div class="long" :style="'width:'+ persent +'%;'"></div>
+            </div>
+            <span> {{ getPersent() }}% </span>
+        </div>
+
+        <!-- input实时添加任务 -->
+        <input v-model="itemData" type="text" @keyup.enter="addTask()" />
+
+        <!-- todolist标题 -->
+        <h3> {{message}}</h3>
+
+        <!-- 所有的任务 -->
+        <ul>
+            <todo-item v-for="item in list" :key="item.id" :id="item.id" :title="item.title" :finished="item.finished"
+                :icon="item.icon" @item-finish="handleFinish(item.id)">
+                <template v-slot:pre-icon="{value}">
+                    <div class="icon">
+                        <img :src="item.icon">
+                    </div>
+                </template>
+                <template v-slot:suf-num="{num}">
+                    <span> {{item.id}} </span>
+                </template>
+            </todo-item>
+
+        </ul>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        //定义todo-item组件
+        Vue.component('todo-item', {
+            props: {
+                id: Number,
+                title: String,
+                finished: Boolean,
+                icon: String,
+            },
+            template: `
+            <li class="list-item">
+                <div class="task-item">
+                    <slot name="pre-icon" :value="icon"></slot>
+                    <span v-if="!finished">{{title}}</span>
+                    <span v-else style="text-decoration: line-through;">{{title}}</span>
+                    <slot name="suf-num" :num="id"></slot>
+                </div>
+                <button v-show="!finished" @click="handleClick">结束</button>
+            </li>
+            `,
+            methods: {
+                handleClick(e) {
+                    console.log("点击了结束事件")
+                    this.$emit('item-finish', [this.id, this.title, this.finished])
+                }
+            }
+        })
+
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                message: 'todolist小练习',
+                itemData: '',
+                persent: null,
+                count: 0,
+                list: [
+                    {
+                        id: 1,
+                        title: 'Potoshop',
+                        finished: false,
+                        icon: '../images/42.ico'
+                    },
+                    {
+                        id: 2,
+                        title: '音乐',
+                        finished: false,
+                        icon: '../images/49.ico'
+                    },
+                    {
+                        id: 3,
+                        title: 'Java',
+                        finished: true,
+                        icon: '../images/50.ico'
+                    },
+                    {
+                        id: 4,
+                        title: '音乐',
+                        finished: false,
+                        icon: '../images/49.ico'
+                    },
+                    {
+                        id: 5,
+                        title: 'PhotShop',
+                        finished: false,
+                        icon: '../images/42.ico'
+                    },
+                ]
+
+            },
+            created() {
+                this.list.map((v) => { v.finished ? this.count++ : this.count })
+            },
+            methods: {
+                // 结束按钮监听
+                handleFinish(value) {
+                    this.list.map((v) => {
+                        if (v.id === value) {
+                            v.finished = true
+                        }
+                    })
+                    this.count = 0
+                    const len = this.list.length
+                    for (let index = 0; index < len; index++) {
+                        const item = this.list[index];
+                        if (item.finished == true) {
+                            this.count++
+                        }
+                    }
+                    this.getPersent()
+                },
+                // 添加任务
+                addTask() {
+                    let lastId = this.list[this.list.length - 1].id
+                    let item = {
+                        id: lastId + 1,
+                        title: this.itemData,
+                        finished: false,
+                        icon: '../images/42.ico'
+                    }
+                    this.list.push(item)
+                    this.itemData = ''
+                },
+                // 计算百分比
+                getPersent() {
+                    this.persent = Math.floor(this.count / this.list.length * 100)
+                    return this.persent
+                }
+
+            },
+
+        })
+    </script>
+</body>
+
+<style>
+    ul,
+    li {
+        list-style-type: none;
+    }
+
+    .icon {
+        display: inline-block;
+        width: 25px;
+        height: 25px;
+    }
+
+    img {
+        width: 100%;
+        height: 100%;
+    }
+
+    .progress {
+        display: flex;
+    }
+
+    .longwarp {
+        width: 80%;
+        height: 15px;
+        border: 1px solid coral;
+    }
+
+    .long {
+        width: 0;
+        height: 15px;
+        margin-bottom: 10px;
+        background-color: coral;
+    }
+
+    .list-item {
+        width: 40%;
+        display: flex;
+        margin-top: 10px;
+        padding-bottom: 5px;
+        border-bottom: 1px #ccc solid;
+    }
+
+    .task-item {
+        display: flex;
+        align-items: center;
+        width: 40%;
+    }
+</style>
+
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../css/sudoku.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <meta name="referrer" content="no-referrer" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <!-- 禁止将数字变为电话号码 -->
+    <meta name="format-detection" content="telephone=no" />
+    <!-- iphone 设备中的 safari 私有 meta 标签，允许全屏模式浏览，隐藏浏览器导航栏 -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <!-- 支持用户将网页创建快捷键方式到桌面时，其图标变为我们自己定义的图标 -->
+    <link rel="apple-touch-icon-precomposed"
+        href="https://public-cdn-oss.mosoteach.cn/avatar/2019/2D/f9d1c04010025227d6e018f553431e21.jpg?v=1551079855&x-oss-process=style/s200x200" />
+    <link name="author" content="xunmi, 1224178565@qq.com" />
+    <title>九宫格</title>
+</head>
+
+<body>
+    <div id="app">
+        <div class="top-div">
+            <div class="search">
+                <i class="iconfont find-icon">&#xe621;</i>
+                <input type="text" class="sear-input" placeholder="山西健康码">
+                <div class="icon">
+                    <i class="iconfont" style="font-size: 20px; color: rgb(254, 255, 254);">&#xe63b;</i>
+                    <i class="iconfont" style="font-size: 20px; color: rgb(254, 255, 254);">&#xe652;</i>
+                </div>
+            </div>
+            <div class="function">
+                <div class="tab-div">
+                    <i class="iconfont top-icon">&#xe604;</i>
+                    <span class="top-font">扫一扫</span>
+                </div>
+                <div class="tab-div">
+                    <i class="iconfont top-icon">&#xe605;</i>
+                    <span class="top-font">付钱</span>
+                </div>
+                <div class="tab-div">
+                    <i class="iconfont top-icon">&#xe755;</i>
+                    <span class="top-font">收钱</span>
+                </div>
+                <div class="tab-div">
+                    <i class="iconfont top-icon">&#xe650;</i>
+                    <span class="top-font">卡包</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="main">
+            <box-div v-for="(item, index) in boxs" :icon="item.icon" :content="item.content" :key="index"></box-div>
+        </div>
+
+        <!-- 底部 tab -->
+        <div class="bottom-div">
+            <div class="tab-div">
+                <i class="iconfont" :style="select">&#xe602;</i>
+                <span class="small" :style="select">首页</span>
+            </div>
+            <div class="tab-div">
+                <i class="iconfont">&#xe600;</i>
+                <span class="small">财富</span>
+            </div>
+            <div class="tab-div">
+                <i class="iconfont">&#xe63e;</i>
+                <span class="small">口碑</span>
+            </div>
+            <div class="tab-div">
+                <i class="iconfont">&#xe603;</i>
+                <span class="small">朋友</span>
+            </div>
+            <div class="tab-div">
+                <i class="iconfont">&#xe601;</i>
+                <span class="small">我的</span>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    Vue.component('box-div', {
+        props: {
+            icon: String,
+            content: String
+        },
+        template: `
+            <div style="display: flex; flex-direction: column">
+                <i class="iconfont">{{ icon }}</i>
+                <span>{{ content }}为啥我不能使用{{}}</span>
+            </div>
+        `
+    })
+
+
+    let vue = new Vue({
+        el: '#app',
+        data: {
+            select: {
+                color: 'rgb(38, 161, 247)'
+            },
+            boxs: [
+                {
+                    icon: 'dsad',
+                    content: '转账'
+                },
+                {
+                    icon: '',
+                    content: '信用卡还款'
+                },
+                {
+                    icon: '',
+                    content: '充值中心'
+                },
+                {
+                    icon: '',
+                    content: '余额宝'
+                },
+                {
+                    icon: '',
+                    content: '淘票票电影'
+                },
+                {
+                    icon: '',
+                    content: '滴滴出行'
+                },
+                {
+                    icon: '',
+                    content: '校园生活'
+                },
+                {
+                    icon: '',
+                    content: '芝麻信用'
+                },
+            ]
+        },
+
+        created() {
+
+        },
+
+        methods: {
+
+        }
+
+    })
+</script>
+
+</html>

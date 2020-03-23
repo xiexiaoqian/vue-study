@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="shortcut icon" href="../../images/favicon.ico" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="../../css/todolist4.css">
+    <meta name="referrer" content="no-referrer" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <!-- 禁止将数字变为电话号码 -->
+    <meta name="format-detection" content="telephone=no" />
+    <!-- iphone 设备中的 safari 私有 meta 标签，允许全屏模式浏览，隐藏浏览器导航栏 -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <!-- 支持用户将网页创建快捷键方式到桌面时，其图标变为我们自己定义的图标 -->
+    <link rel="apple-touch-icon-precomposed"
+        href="https://public-cdn-oss.mosoteach.cn/avatar/2019/2D/f9d1c04010025227d6e018f553431e21.jpg?v=1551079855&x-oss-process=style/s200x200" />
+    <link name="author" content="xunmi, 1224178565@qq.com" />
+    <title>todolist---插槽练习</title>
+</head>
+
+<body>
+    <div id="app">
+        <div class="top">
+            <input class="input" type="text" v-model="text" @keyup.enter="addItem()" placeholder="请输入新的任务">
+            <label for="span" class="bar">
+                <label class="br" :style="{width: pro}"></label>
+            </label>
+            <span id="span">{{ progress() }}</span>
+        </div>
+        <ul class="main">
+            <todo-item v-for="(item, index) in list" :key="index" :id='item.id' :title='item.title'
+                :finished='item.finished' :icon='item.icon' :description='item.description' @item-finish="handleFinish">
+                <template v-slot:pre-icon="{ value }">
+                    <div class="img">
+                        <img :src="value" alt="">
+                    </div>
+                </template>
+                <template v-slot:mid-font="{ font }">
+                    <span>{{ font }}</span>
+                </template>
+            </todo-item>
+        </ul>
+    </div>
+</body>
+<script>
+    Vue.component('todo-item', {
+        props: {
+            id: Number,
+            title: String,
+            finished: Boolean,
+            icon: String,
+            description: String
+        },
+        template: `
+            <li>
+                <slot name="pre-icon" :value="icon"></slot>
+                <div class="info">
+                    <span v-if="!finished">{{ title }}</span>
+                    <span v-else style="text-decoration: line-through;">{{ title }}</span>
+                    <slot name="mid-font" :font="description"></slot>
+                </div>
+                <button v-show="!finished" @click="handleClick" class="btn">结束</button>
+            </li>
+        `,
+        methods: {
+            handleClick() {
+                this.$emit('item-finish', [this.id, this.title, this.finished])
+            }
+        }
+    })
+    const vue = new Vue({
+        el: '#app',
+        data: {
+            pro: '',
+            success: 0,
+            message: '封装item，传递自定义事件',
+            text: '  ',
+            list: [
+                {
+                    id: 1,
+                    title: '课程1',
+                    finished: false,
+                    icon: '../../images/1.png',
+                    description: '语文'
+                },
+                {
+                    id: 2,
+                    title: '课程2',
+                    finished: true,
+                    icon: '../../images/2.png',
+                    description: '数学'
+                },
+                {
+                    id: 3,
+                    title: '课程3',
+                    finished: false,
+                    icon: '../../images/3.png',
+                    description: '英语'
+                },
+                {
+                    id: 4,
+                    title: '课程4',
+                    finished: true,
+                    icon: '../../images/4.png',
+                    description: '生物'
+                },
+                {
+                    id: 5,
+                    title: '课程5',
+                    finished: false,
+                    icon: '../../images/5.png',
+                    description: '化学'
+                },
+            ]
+        },
+        methods: {
+            handleFinish(value) {
+                this.success = 1
+                this.list.map((v) => {
+                    v.finished ? this.success++ : this.success
+                    v.id === value[0] ? v.finished = true : v.finished
+                })
+                console.log(this.pro);
+            },
+            addItem() {
+                const maxId = this.list[this.list.length - 1].id
+                let item = {
+                    id: maxId + 1,
+                    title: this.text,
+                    finished: false,
+                    icon: '../../images/0.png',
+                    description: '无'
+                }
+                this.list.push(item)
+                this.text = ''
+            },
+            progress() {
+                this.pro = Math.floor((this.success / this.list.length) * 100) + '%'
+                return this.pro;
+            }
+        },
+        created() {
+            this.list.map((v) => { v.finished ? this.success++ : this.success })
+        },
+    })
+</script>
+
+</html>
