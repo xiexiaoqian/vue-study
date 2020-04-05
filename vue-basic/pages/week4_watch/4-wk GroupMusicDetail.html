@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+		<meta name="renderer" content="webkit" />
+		<meta name="force-rendering" content="webkit" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimun-scale=1.0, maximum-scale=1.0,
+		    user-scalable=no minimal-ui" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<meta name="referrer" content="never" />
+
+		<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+		<link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+		<link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+		<title>音乐详情</title>
+	</head>
+
+	<body>
+		<div id="app">
+			<v-app>
+				<v-content>
+					<v-container class="ba-container">
+						<div class="ba-musicside">
+							<div class="ba-musiccover">
+								<img src="http://p2.music.126.net/TSev9D2o8mIeOgXZPxO5MA==/109951164853711515.jpg">
+							</div>
+							<div class="ba-music-toolbar">
+								<svg t="1585994411202" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+								 p-id="20022" width="30" height="30">
+									<path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64z m0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"
+									 p-id="20023" fill="#f5f1fd"></path>
+									<path d="M719.4 499.1l-296.1-215c-10.6-7.7-25.3-0.2-25.3 12.9v430c0 13.1 14.8 20.5 25.3 12.9l296.1-215c8.8-6.4 8.8-19.4 0-25.8z m-257.6 134V390.9L628.5 512 461.8 633.1z"
+									 p-id="20024" fill="#f5f1fd"></path>
+								</svg>
+								<svg t="1585994465830" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+								 p-id="1951" width="32" height="32">
+									<path d="M908.1 353.1l-253.9-36.9L540.7 86.1c-3.1-6.3-8.2-11.4-14.5-14.5-15.8-7.8-35-1.3-42.9 14.5L369.8 316.2l-253.9 36.9c-7 1-13.4 4.3-18.3 9.3-12.3 12.7-12.1 32.9 0.6 45.3l183.7 179.1-43.4 252.9c-1.2 6.9-0.1 14.1 3.2 20.3 8.2 15.6 27.6 21.7 43.2 13.4L512 754l227.1 119.4c6.2 3.3 13.4 4.4 20.3 3.2 17.4-3 29.1-19.5 26.1-36.9l-43.4-252.9 183.7-179.1c5-4.9 8.3-11.3 9.3-18.3 2.7-17.5-9.5-33.7-27-36.3zM664.8 561.6l36.1 210.3L512 672.7 323.1 772l36.1-210.3-152.8-149L417.6 382 512 190.7 606.4 382l211.2 30.7-152.8 148.9z"
+									 p-id="1952" fill="#f5f1fd"></path>
+								</svg>
+								<svg t="1585994903512" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+								 p-id="2405" width="32" height="32">
+									<path d="M752 664c-28.5 0-54.8 10-75.4 26.7L469.4 540.8c1.7-9.3 2.6-19 2.6-28.8s-0.9-19.4-2.6-28.8l207.2-149.9C697.2 350 723.5 360 752 360c66.2 0 120-53.8 120-120s-53.8-120-120-120-120 53.8-120 120c0 11.6 1.6 22.7 4.7 33.3L439.9 415.8C410.7 377.1 364.3 352 312 352c-88.4 0-160 71.6-160 160s71.6 160 160 160c52.3 0 98.7-25.1 127.9-63.8l196.8 142.5c-3.1 10.6-4.7 21.8-4.7 33.3 0 66.2 53.8 120 120 120s120-53.8 120-120-53.8-120-120-120z m0-476c28.7 0 52 23.3 52 52s-23.3 52-52 52-52-23.3-52-52 23.3-52 52-52zM312 600c-48.5 0-88-39.5-88-88s39.5-88 88-88 88 39.5 88 88-39.5 88-88 88z m440 236c-28.7 0-52-23.3-52-52s23.3-52 52-52 52 23.3 52 52-23.3 52-52 52z"
+									 p-id="2406" fill="#f5f1fd"></path>
+								</svg>
+
+								<svg t="1585995302436" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+								 p-id="2680" width="32" height="32">
+									<path d="M505.7 661c3.2 4.1 9.4 4.1 12.6 0l112-141.7c4.1-5.2 0.4-12.9-6.3-12.9h-74.1V168c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v338.3H400c-6.7 0-10.4 7.7-6.3 12.9l112 141.8z"
+									 p-id="2681" fill="#f5f1fd"></path>
+									<path d="M878 626h-60c-4.4 0-8 3.6-8 8v154H214V634c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v198c0 17.7 14.3 32 32 32h684c17.7 0 32-14.3 32-32V634c0-4.4-3.6-8-8-8z"
+									 p-id="2682" fill="#f5f1fd"></path>
+								</svg>
+								<svg t="1585995328080" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+								 p-id="3002" width="30" height="30">
+									<path d="M512 512m-48 0a48 48 0 1 0 96 0 48 48 0 1 0-96 0Z" p-id="3003" fill="#D1C4E9"></path>
+									<path d="M712 512m-48 0a48 48 0 1 0 96 0 48 48 0 1 0-96 0Z" p-id="3004" fill="#D1C4E9"></path>
+									<path d="M312 512m-48 0a48 48 0 1 0 96 0 48 48 0 1 0-96 0Z" p-id="3005" fill="#D1C4E9"></path>
+									<path d="M925.2 338.4c-22.6-53.7-55-101.9-96.3-143.3-41.3-41.3-89.5-73.8-143.3-96.3C630.6 75.7 572.2 64 512 64h-2c-60.6 0.3-119.3 12.3-174.5 35.9-53.3 22.8-101.1 55.2-142 96.5-40.9 41.3-73 89.3-95.2 142.8-23 55.4-34.6 114.3-34.3 174.9 0.3 69.4 16.9 138.3 48 199.9v152c0 25.4 20.6 46 46 46h152.1c61.6 31.1 130.5 47.7 199.9 48h2.1c59.9 0 118-11.6 172.7-34.3 53.5-22.3 101.6-54.3 142.8-95.2 41.3-40.9 73.8-88.7 96.5-142 23.6-55.2 35.6-113.9 35.9-174.5 0.3-60.9-11.5-120-34.8-175.6z m-151.1 438C704 845.8 611 884 512 884h-1.7c-60.3-0.3-120.2-15.3-173.1-43.5l-8.4-4.5H188V695.2l-4.5-8.4C155.3 633.9 140.3 574 140 513.7c-0.4-99.7 37.7-193.3 107.6-263.8 69.8-70.5 163.1-109.5 262.8-109.9h1.7c50 0 98.5 9.7 144.2 28.9 44.6 18.7 84.6 45.6 119 80 34.3 34.3 61.3 74.4 80 119 19.4 46.2 29.1 95.2 28.9 145.8-0.6 99.6-39.7 192.9-110.1 262.7z"
+									 p-id="3006" fill="#f5f1fd"></path>
+								</svg>
+							</div>
+						</div>
+						<div class="ba-contentside">
+							<p style="font-size: 30px;">葡萄架下的篝火</p>
+							<div class="ba-detail">
+								<p>作者：艾福杰尼 - 葡萄架下的篝火</p>
+								<p>收藏数：2484</p>
+							</div>
+							<div class="ba-musictext">
+								<p>Stay exactly as you are，</p>
+								<p>In my shirt dancing around the room，</p>
+								<p>Please stay exactly as you are，</p>
+								<p>The way you smile and greet the rising moon，</p>
+								<p>And you told me my voice was sweet like akiss，</p>
+								<p>And I said when I lose it what will you do?</p>
+								<p>I don’t know what the point of anything is，</p>
+								<p>But I hope I can spend my time next to you，</p>
+								<p>Maybe when we’re older，</p>
+								<p>You will say</p>
+							</div>
+						</div>
+					</v-container>
+				</v-content>
+			</v-app>
+		</div>
+
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+		<script>
+			new Vue({
+				el: '#app',
+				vuetify: new Vuetify(),
+				data:{
+					line: 5,
+				},
+				methods:{
+					
+				}
+			})
+		</script>
+	</body>
+
+	<style type="text/css">
+		.icon {
+			color: #D1C4E9;
+		}
+
+		* {
+			box-sizing: border-box;
+			transition: all 1s ease;
+			font-family: "arial, helvetica, sans-serif";
+		}
+
+		#app {
+			background-color: #21252b;
+			color: rgba(255, 255, 255, 0.9);
+		}
+
+		.ba-container {
+			display: flex;
+			align-items: center;
+			width: 75%;
+			height: 700px;
+			margin-top: 100px;
+			padding-top: 80px;
+			border-radius: 10px;
+			background-color: rgba(40, 44, 53, 0.7);
+			background-image: linear-gradient(to bottom right, #B388FF, #673AB7)
+		}
+
+		.ba-musicside {
+			width: 40%;
+			height: 100%;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			/* border: #D1C4E9 1px solid; */
+		}
+
+		.ba-contentside {
+			display: flex;
+			flex-direction: column;
+			width: 49%;
+			height: 100%;
+			/* border: #D1C4E9 1px solid; */
+		}
+
+		.ba-musiccover {
+			width: 400px;
+			height: 400px;
+		}
+
+		.ba-music-toolbar {
+			display: flex;
+			align-items: center;
+			justify-content: space-around;
+			width: 60%;
+			height: 50px;
+			margin-top: 40px;
+			/* border: #D1C4E9 1px solid; */
+		}
+
+		.ba-detail {
+			display: flex;
+			justify-content: space-around;
+		}
+		
+		.ba-musictext {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			margin-top: 20px;
+		}
+		
+		.ba-musiccover img {
+			width: 100%;
+			height: 100%;
+			border-radius: 50%;
+			animation: ba-whirl 10s linear infinite;
+		}
+
+		@keyframes ba-whirl {
+			from {
+				transform: rotate(0);
+			}
+
+			to {
+				transform: rotate(-360deg);
+			}
+		}
+	</style>
+</html>

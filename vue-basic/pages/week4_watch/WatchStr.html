@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
+    <meta name="referrer" content="no-referrer">
+    <title>传字符串方式实现watch侦听</title>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text " placeholder="please input" v-model.lazy="count"/>
+        <!-- <input type="text" 
+        placeholder="please input"
+        :value = "count"
+        @keyUp.enter="handleEnter($event)"
+        > -->
+        
+        <hr />
+        <h4>count: {{count}} </h4>
+        <h4>square: {{square}} </h4>
+
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    const vm = new Vue({
+        el: '#app',
+        data: {
+            count: 1,
+            square: 1,
+        },
+        methods: {
+            handleChange() {
+                console.log('count改变了：' + this.count)
+                this.square = this.count * this.count
+            },
+            // handleEnter(event){
+            //     console.log('enter')
+            //     this.count = event.target.value
+            // }
+        },
+        watch: {
+            count: 'handleChange'
+        },
+
+
+
+
+    })
+</script>
+<style>
+*{
+    align-items: center;
+}
+</style>
+</html>

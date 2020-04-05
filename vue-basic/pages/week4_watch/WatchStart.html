@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>watch起步</title>
+</head>
+
+<body>
+    <div id="app">
+        <button @click="count+=1">点击加1</button>
+        <button @click="count+=0">点击加0，值不变</button>
+        <button @click="count+=Math.floor(Math.random()*50)">点击加随机数</button>
+
+        <h3>{{count}}</h3>
+        <h4>{{list}}</h4>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                count: 1,
+                list:[]
+            },
+            watch: {
+
+                count(){
+                    console.log('count改变' + this.count)
+                    this.list.push(this.count)
+                }
+            }
+        });
+    </script>
+</body>
+</html>

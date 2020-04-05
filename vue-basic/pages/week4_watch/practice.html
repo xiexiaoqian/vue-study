@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="shortcut icon" href="../../images/favicon.ico" type="image/x-icon">
+    <title>模板</title>
+</head>
+
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    /* 滚动条样式设置 */
+    *::-webkit-scrollbar {
+        /* 滚动条整体样式 */
+        width: 8px;
+        height: 1px;
+    }
+
+    *::-webkit-scrollbar-thumb {
+        /* 滚动条里面的小方块 */
+        border-radius: 5px;
+        height: 30px;
+        background: rgb(183, 183, 183);
+    }
+
+    *::-webkit-scrollbart-track {
+        /* 滚动条里面的轨道 */
+        border-radius: 5px;
+        background: rhb(229, 229, 229);
+    }
+
+    .nav {
+        width: 100%;
+        height: 60px;
+        background-color: rgb(0, 145, 234);
+        position: fixed;
+        margin-top: -110px;
+        border-radius: 3px;
+    }
+
+    /* 进入离开动画 */
+    .nav-enter-active {
+        transition: all 1s ease;
+    }
+
+    .nav-leave-active {
+        transition: all 0.8s ease;
+    }
+
+    .nav-enter,
+    .nav-leave-to {
+        transform: translateY(10px);
+        opacity: 0;
+    }
+
+    .main {
+        width: 90%;
+        padding: 10px;
+        margin: 0 auto;
+        margin-top: 100px;
+        height: 1500px;
+        border: 1px solid rgb(238, 109, 116);
+        border-radius: 3px;
+    }
+
+    .menu-title,
+    .subMenu-title {
+        font-size: Roboto, Noto, Helvetica, Arial;
+        font-size: 20px;
+        font-weight: 500;
+        line-height: 20px;
+    }
+
+    .menu-title {
+        font-weight: 800;
+    }
+
+    .menu,
+    .sub-div {
+        transition: all 0.5s ease 0s;
+        cursor: pointer;
+        margin-bottom: 20px;
+    }
+
+    .menu,
+    .sub-div {
+        width: 250px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .menu {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .title-div {
+        width: 80%;
+    }
+
+    .title-div {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .menu:hover,
+    .sub-div:hover {
+        background-color: rgb(231, 231, 231);
+    }
+
+    .sub-div {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .sub-menu {
+        display: flex;
+        align-items: center;
+        width: 80%;
+        height: 100%;
+    }
+
+    .sub-menu-enter-active,
+    .sub-menu-leave-active {
+        transition: opacity .5s;
+    }
+
+    .sub-menu-enter,
+    .sub-menu-leave-to {
+        opacity: 0;
+    }
+</style>
+
+<body>
+    <div id="app">
+        <transition name="nav">
+            <div class="nav" v-show="isShowNav"></div>
+        </transition>
+        <div class="main">
+            <div class="menu-div" v-for="(menu, index) in menus" :key="index">
+                <div class="menu" @click="changeArr(index)">
+                    <i class="material-icons" :style="{color: menu.color}">{{menu.icon}}</i>
+                    <div class="title-div">
+                        <h1 class="menu-title">{{menu.title}}</h1>
+                        <i class="material-icons">keyboard_arrow_down</i>
+                    </div>
+                </div>
+                <div v-show="showArr[index]" v-for="(subMenu, i) in menu.option" :key="i" class="sub-div">
+                    <transition name="sub-menu">
+                        <div class="sub-menu">
+                            <span class="subMenu-title">{{subMenu}}</span>
+                        </div>
+                    </transition>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    let vue = new Vue({
+        el: '#app',
+        data: {
+            position: 0,
+            isShowNav: false,
+            showArr: [],
+            menus: [
+                {
+                    icon: 'near_me',
+                    color: 'rgb(33, 150, 243)',
+                    title: '开始使用',
+                    option: ['安装', '兼容性', 'JavaScript 工具库', 'JavaScript全局方法']
+                },
+                {
+                    icon: 'layers',
+                    color: 'rgb(255, 87, 34)',
+                    title: '样式',
+                    option: ['颜色与主题', '字体', '网格布局', '排版']
+                },
+                {
+                    icon: 'widgets',
+                    color: 'rgb(76, 175, 80)',
+                    title: '组件',
+                    option: ['涟漪动画效果', '按钮', '浮动操作按钮', '下拉选择', '分割线', '可扩展面板', '文本框']
+                },
+                {
+                    icon: 'view_carousel',
+                    color: 'rgb(121, 85, 72)',
+                    title: 'JavaScript 插件',
+                    option: ['Collapse', 'Headroom']
+                },
+                {
+                    icon: 'local_mall',
+                    color: 'rgb(156, 39, 176)',
+                    title: '资源',
+                    option: ['Material 图标']
+                }
+            ]
+        },
+        methods: {
+            showNav() {
+                this.position = window.scrollY
+                if (this.position >= 90) {
+                    this.isShowNav = false
+                } else {
+                    this.isShowNav = true
+                }
+            },
+            changeArr(i) {
+                let isShow = this.showArr[i]
+                this.showArr.splice(i, 1, !isShow)
+            }
+        },
+        watch: {
+        },
+        created() {
+            for (let i = 0; i < this.menus.length; i++) {
+                this.showArr.push(false)
+            }
+            // 等待页面开始滚动才执行监听器
+            this.$nextTick(() => {
+                window.addEventListener('scroll', this.showNav)
+            })
+        }
+    })
+</script>
+
+
+</html>

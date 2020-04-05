@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="content-type" content="text/html; charset=utf-8">
+		<meta name="renderer" content="webkit" />
+		<meta name="force-rendering" content="webkit" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimun-scale=1.0, maximum-scale=1.0,
+		    user-scalable=no minimal-ui" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<meta name="referrer" content="never" />
+
+		<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+		<link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
+		<link href="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.min.css" rel="stylesheet">
+		<title>个人中心</title>
+	</head>
+
+	<body>
+		<div id="app">
+			<v-app>
+				<v-content>
+					<v-container class="ba-container">
+						<h1>个人中心</h1>
+						<div class="ba-container-header">
+							<div class="ba-avatar">
+								<div class="ba-img">
+									<img src="../../images/img%20(2).jpg">
+								</div>
+								<!-- <div class="ba-text">
+									<p>买辣椒也用券</p>
+								</div> -->
+							</div>
+						</div>
+						<div class="ba-container-body">
+							<div class="ba-item">
+								<div class="ba-item-info" >
+									<p>昵称：item-info</p>
+									<p>手机号：item-info</p>
+									<p>邮箱：item-info</p>
+									<p>创建时间：item-info</p>
+									<p>上次登录时间：item-info</p>
+								</div>
+							</div>
+
+						</div>
+					</v-container>
+				</v-content>
+			</v-app>
+		</div>
+
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vuetify@2.x/dist/vuetify.js"></script>
+		<script>
+			new Vue({
+				el: '#app',
+				vuetify: new Vuetify(),
+				data:{
+					line: 5,
+				},
+				methods:{
+					
+				}
+			})
+		</script>
+	</body>
+
+	<style type="text/css">
+		* {
+			box-sizing: border-box;
+			transition: all 1s ease 0;
+		}
+
+		#app {
+			background-color: #282c35;
+			color: rgba(255, 255, 255, 0.9);
+		}
+
+
+
+		.ba-container {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			width: 75%;
+			height: 700px;
+			margin-top: 100px;
+			padding-top: 80px;
+			border-radius: 10px;
+			background-color: rgba(40, 44, 53, 0.7);
+			background-image: linear-gradient(to bottom right, #B388FF, #673AB7)
+		}
+
+		.ba-container-header {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 100%;
+			height: 25%;
+			margin-top: 20px;
+			padding: 10px 50px 10px 50px;
+		}
+
+		.ba-container-body {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			width: 100%;
+			height: 73%;
+			padding: 20px;
+		}
+
+		.ba-avatar {
+			display: flex;
+			align-items: center;
+			width: 60%;
+			height: 100%;
+			padding: 10px;
+			border-bottom: #D1C4E9 1px solid;
+		}
+
+		.ba-img {
+			width: 100px;
+			height: 100px;
+		}
+
+		.ba-img img {
+			width: 100%;
+			height: 100%;
+			border-radius: 50%;
+		}
+
+		.ba-text {
+			margin-left: 20px;
+		}
+		
+		.ba-text p {
+			font-size: 24px;
+		}
+
+		.ba-item {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			width: 100%;
+			height: 80%;
+		}
+
+		.ba-item-info {
+			display: flex;
+			flex-direction: column;
+			/* align-items: center; */
+			justify-content: center;
+			width: 50%;
+			margin: 5px;
+		}
+		
+		.ba-item-info p {
+			font-size: 20px;
+		}
+
+		
+	</style>
+</html>

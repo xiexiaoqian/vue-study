@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>watch实例：二级联动菜单</title>
+</head>
+
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        background-color: #282c34;
+        color: rgba(255, 255, 255, 0.8);
+    }
+
+    ul,
+    li {
+        list-style-type: none;
+    }
+
+    .content {
+        width: 40%;
+        border: 1px solid darkgray;
+        padding: 5px;
+        margin: 5px;
+    }
+
+    .groupwrap {
+        width: 99%;
+        border: 1px solid darkgray;
+        padding: 5px;
+        margin: 5px;
+    }
+
+    .submenu-item {
+        display: flex;
+        margin: 5px;
+    }
+
+    .item-btn {
+        width: 50px;
+        height: 25px;
+        padding: 2px;
+    }
+
+    
+</style>
+
+<body>
+    <div id="app">
+        <div class="content">
+            <h2>我的关注</h2>
+            <div ref="box" class="box">全部关注 {{count}}</div>
+            <div v-for="(menu, index) in menus" :key="index">
+                <div class="groupwrap">
+                    <h4> {{menu.name}}: {{menu.subMenus.length}} </h4>
+                    <input type="text" placeholder="添加关注" v-model.lazy="menu.subMenus[menu.subMenus.length]"
+                        @keyUp.enter="handleSubMenu(index)">
+                    <ul>
+                        <li class="submenu-item" v-for="(subMenu,subIndex) in menu.subMenus" :key="subIndex">
+                            <p style="width: 150px;">{{ subMenu }}</p>
+                            <button class="item-btn" @click="spliceItem(index)"> 取关 </button>
+                        </li>
+                    </ul>
+                    
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: "#app",
+        data: {
+            count: 9,
+            menus: [
+                {
+                    id: 1,
+                    name: '游戏区',
+                    subMenus: ['老番茄', '中国Boy', '花少北']
+                },
+                {
+                    id: 2,
+                    name: '学习区',
+                    subMenus: ['一条正弦', 'oeasy', '3Blue1Brown']
+                },
+                {
+                    id: 3,
+                    name: '时尚区',
+                    subMenus: ['党妹', '今天想吃小鱼干', '仙姆SamChak']
+                }
+            ]
+
+        },
+        methods: {
+            handleSubMenu(index) {
+                console.log(this.menus[index].subMenus)
+                this.count++
+            },
+            spliceItem(index) {
+                let item = this.menus[index].subMenus
+                item.splice(index, 1)
+                console.log(item)
+            }
+        },
+    })
+
+</script>
+
+
+</html>

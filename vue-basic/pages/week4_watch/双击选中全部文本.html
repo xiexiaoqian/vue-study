@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<template>
+		      <div @dblclick="getSelectText">鼠标双击文本 全部选择</div>  
+		</template>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<script>
+		export default {
+		  name: 'Markdown',
+		  data() {
+		    return {
+		      input: '# hello markdown'
+		    }
+		  },
+		  computed: {
+		    
+		  },
+		  methods:  {
+		          getSelectText (e) {
+		              if  (document.body.createTextRange)  {
+		                  // IE兼容
+		                  var range = document.body.createTextRange();
+		                  range.moveToElementText(e.target);
+		                  range.select();
+		              } else {
+		                  let selection = window.getSelection();
+		                  let range = document.createRange();
+		                  range.selectNodeContents(e.target);
+		                  selection.removeAllRanges();
+		                  selection.addRange(range);
+		              }
+		         }
+		    }
+		}
+		</script>
+	</body>
+</html>
